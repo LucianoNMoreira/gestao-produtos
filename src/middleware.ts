@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-// import { decrypt } from '@/app/lib/session'
+import { jwtDecode } from "jwt-decode"
 import { cookies } from 'next/headers'
 
 const protectedRoutes = ['/']
@@ -11,10 +11,11 @@ export default async function middleware(req: NextRequest) {
     const isPublicRoute = publicRoutes.includes(path)
 
     const cookie = (await cookies()).get('session')?.value
-    //   const session = await decrypt(cookie)
-    const session = cookie ? JSON.parse(cookie) : undefined
+    const session: any = cookie ? jwtDecode(cookie) : undefined
 
-    if (isProtectedRoute && !session?.userId) {
+    console.log('session', session)
+
+    if (isProtectedRoute && !session?.user?.id) {
         return NextResponse.redirect(new URL('/login', req.nextUrl))
     }
 
