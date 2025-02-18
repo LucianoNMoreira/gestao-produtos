@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { jwtDecode } from "jwt-decode"
+import jsonwebtoken from 'jsonwebtoken'
+// import { jwtDecode } from "jwt-decode"
 import { cookies } from 'next/headers'
+import {jwtVerify} from 'jose';
 
 const publicRoutes = ['/login']
 
@@ -9,11 +11,19 @@ export default async function middleware(req: NextRequest) {
     const isPublicRoute = publicRoutes.includes(path)
 
     const cookie = (await cookies()).get('session')?.value
-    const session: any = cookie ? jwtDecode(cookie) : undefined
 
-    console.log('session', session)
+    // Não funciona em ambientes de execução de fronteira
+    // const payload = jsonwebtoken.verify(cookie!, process.env.JWT_SECRET!);
 
-    if (!isPublicRoute && !session?.user?.id) {
+    // Não valida a assinatura do token, apenas decodifica
+    // const payload: any = cookie ? jwtDecode(cookie) : undefined
+
+    // Valida a assinatura do token e decodifica
+    const payload: any = cookie ? (await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET))).payload : undefined
+
+    console.log('payload', payload)
+
+    if (!isPublicRoute && !payload?.user?.id) {
         return NextResponse.redirect(new URL('/login', req.nextUrl))
     }
 

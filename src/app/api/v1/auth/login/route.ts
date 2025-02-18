@@ -16,7 +16,7 @@ export async function POST(req: any) {
                                     id: '123'
                                 }
                             }, 
-                            'chave_secreta',
+                            process.env.JWT_SECRET!,
                             { expiresIn: '1h' }
                         )
         })
