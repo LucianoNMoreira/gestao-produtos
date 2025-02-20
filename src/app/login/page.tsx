@@ -13,7 +13,12 @@ export default function Pagina() {
     const loginUsuario = formData.get('login')
     const senhaUsuario = formData.get('senha')
  
-    await login(loginUsuario, senhaUsuario)
+    try {
+      await login(loginUsuario, senhaUsuario)
+    } catch(e) {
+      console.log("Erro de login", e)
+      alert("Usuário inválido")
+    }
   }
  
   return (

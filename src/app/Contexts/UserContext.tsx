@@ -28,7 +28,7 @@ export const UserProvider = ({ children }: any) => {
 
         setUser(obterUsuarioToken(response.data.token))
     } catch(e) {
-      router.push('/login')
+      throw e
     }
   }
 
