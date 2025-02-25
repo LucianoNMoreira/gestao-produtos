@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import jsonwebtoken from 'jsonwebtoken'
+// import jsonwebtoken from 'jsonwebtoken'
 // import { jwtDecode } from "jwt-decode"
 import { cookies } from 'next/headers'
 import {jwtVerify} from 'jose';
@@ -21,7 +21,7 @@ export default async function middleware(req: NextRequest) {
     // Valida a assinatura do token e decodifica
     const payload: any = cookie ? (await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET))).payload : undefined
 
-    console.log('payload', payload)
+    // console.log('payload', payload)
 
     if (!isPublicRoute && !payload?.user?.id) {
         return NextResponse.redirect(new URL('/login', req.nextUrl))
