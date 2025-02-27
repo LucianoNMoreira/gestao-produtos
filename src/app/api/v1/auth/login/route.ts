@@ -1,13 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import jwt from 'jsonwebtoken'
 import Usuario from '@/db/models/usuario'
-const bcrypt = require('bcrypt')
+import bcrypt from 'bcrypt'
 
 export async function POST(req: any) {
     try {
         const { login, senha } = await req.json()
 
-        const salt = await bcrypt.genSalt(10)
-        const senhaCripto = await bcrypt.hash(senha, salt)
 
         const user = await Usuario.findOne({ login: login })
 
