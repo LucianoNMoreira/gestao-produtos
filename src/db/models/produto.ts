@@ -31,4 +31,3 @@ ProdutoSchema.post<ProdutoQuery>(/^find/, function (docs, next) {
 const Produto = mongoose.models.Produto || mongoose.model('Produto', ProdutoSchema)
 
 export default Produto
-``

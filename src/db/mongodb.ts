@@ -5,4 +5,6 @@ mongoose.connect(
 ).then(() => console.log("MongoDB conectado!"))
 .catch(err => console.error("Erro ao conectar:", err))
 
+mongoose.set('debug', true)
+
 export default mongoose
