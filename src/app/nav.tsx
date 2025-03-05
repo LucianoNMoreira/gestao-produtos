@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { useUser } from "./Contexts/UserContext"
+import Link from "next/link"
 
 export default function Nav() {
   const { user, logout } = useUser()
@@ -12,16 +13,22 @@ export default function Nav() {
 
   return (
     <nav>
-      <a href='/'>Início</a>
+      <Link href='/'>Início</Link>
 
-      {user &&
+      {!user &&
         <>
-          | <button onClick={logout}>Sair</button>
+          | <Link data-testid='link-login' href='/login'>Login</Link>
         </>
       }
 
       {user &&
-          <p>Olá, usuário {user.id}</p>
+        <>
+          | <button data-testid='link-logout' onClick={logout}>Sair</button>
+        </>
+      }
+
+      {user &&
+        <p>Olá, usuário {user.id}</p>
       }
     </nav>
   )
