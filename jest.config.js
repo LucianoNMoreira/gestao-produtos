@@ -1,5 +1,5 @@
 module.exports = {
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-fixed-jsdom', // https://mswjs.io/docs/faq/#requestresponsetextencoder-is-not-defined-jest
   transform: {
     '^.+\\.(jsx?|tsx)$': 'babel-jest',
     '^.+\\.tsx?$': 'ts-jest',
