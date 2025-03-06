@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from 'next/server'
-// import jsonwebtoken from 'jsonwebtoken'
-// import { jwtDecode } from "jwt-decode"
 import { cookies } from 'next/headers'
-import {jwtVerify} from 'jose';
+import { jwtVerify } from 'jose';
 
 const publicRoutes = ['/login']
 
@@ -10,20 +9,18 @@ export default async function middleware(req: NextRequest) {
     const path = req.nextUrl.pathname
     const isPublicRoute = publicRoutes.includes(path)
 
-    const cookie = (await cookies()).get('session')?.value
-
-    // Não funciona em ambientes de execução de fronteira
-    // const payload = jsonwebtoken.verify(cookie!, process.env.JWT_SECRET!);
-
-    // Não valida a assinatura do token, apenas decodifica
-    // const payload: any = cookie ? jwtDecode(cookie) : undefined
-
     // Valida a assinatura do token e decodifica
-    const payload: any = cookie ? (await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET))).payload : undefined
+    try {
+        const cookie = (await cookies()).get('session')?.value
+        console.log('cookie', cookie)
+        // const payload: any = cookie ? (await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET))).payload : undefined
+        const payload = cookie ? await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET)).then(res => res.payload).catch(() => undefined) : undefined
 
-    // console.log('payload', payload)
-
-    if (!isPublicRoute && !payload?.user?.id) {
+        if (!isPublicRoute && !payload?.user?.id) {
+            return NextResponse.redirect(new URL('/login', req.nextUrl))
+        }
+    } catch (e: any) {
+        console.error("Erro ao validar jwt no middleware:", e)
         return NextResponse.redirect(new URL('/login', req.nextUrl))
     }
 
