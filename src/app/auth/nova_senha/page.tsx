@@ -2,8 +2,11 @@
 import { FormEvent } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function Pagina() {
+
+  const router = useRouter()
 
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
@@ -28,7 +31,7 @@ export default function Pagina() {
       console.log('response', response)
 
       alert("Você alterou sua senha!")
-      window.location.href = '/login'
+      router.push('/login')
     } catch(e) {
       console.log("Erro de login", e)
       alert("Ocorreu um erro ao gerar sua nova senha")
