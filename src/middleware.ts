@@ -14,7 +14,7 @@ export default async function middleware(req: NextRequest) {
         const cookie = (await cookies()).get('session')?.value
         console.log('cookie', cookie)
         // const payload: any = cookie ? (await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET))).payload : undefined
-        const payload = cookie ? await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET)).then(res => res.payload).catch(() => undefined) : undefined
+        const payload : any = cookie ? await jwtVerify(cookie, new TextEncoder().encode(process.env.JWT_SECRET)).then(res => res.payload).catch(() => undefined) : undefined
 
         if (!isPublicRoute && !payload?.user?.id) {
             return NextResponse.redirect(new URL('/login', req.nextUrl))
