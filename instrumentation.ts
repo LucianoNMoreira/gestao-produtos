@@ -1,5 +1,5 @@
-import Usuario from '@/db/models/usuario'
-import bcrypt from 'bcrypt'
+// import Usuario from '@/db/models/usuario'
+// import bcrypt from 'bcrypt'
 
 console.log("iniciando instrumentations.ts")
 
