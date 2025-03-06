@@ -3,6 +3,7 @@ import { FormEvent } from 'react'
 import { useUser } from '../Contexts/UserContext'
 
 import { signIn } from "next-auth/react"
+import Link from 'next/link'
  
 export default function Pagina() {
 
@@ -26,9 +27,12 @@ export default function Pagina() {
   return (
     <form onSubmit={handleSubmit}>
       <input type="login" name="login" placeholder="login" required autoFocus />
-      <input type="senha" name="senha" placeholder="senha" required />
+      <input type="password" name="senha" placeholder="senha" required />
       <button type="submit">Login</button>
 
+      <br/>
+
+      <Link href='/auth/recuperar_senha'>Recuperar senha</Link>
       <hr/>
       <p>Ou</p>
 
