@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Produto from '@/db/models/produto'
 
 export async function GET() {
