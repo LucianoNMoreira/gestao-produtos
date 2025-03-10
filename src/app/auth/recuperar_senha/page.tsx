@@ -1,6 +1,6 @@
 'use client'
 import { FormEvent } from 'react'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 
 export default function Pagina() {
 

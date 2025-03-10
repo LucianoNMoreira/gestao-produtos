@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "next build && next start",
     "lint": "next lint",
     "test": "jest --colors --detectOpenHandles --logHeapUsage",
-    "coverage": "jest --colors --coverage"
+    "coverage": "jest --colors --coverage",
+    "test:e2e": "npx playwright test"
   },
   "dependencies": {
     "axios": "^1.7.9",
@@ -30,6 +31,8 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.51.0",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
@@ -50,6 +53,7 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.2.6",
+    "ts-node": "^10.9.2",
     "typescript": "^5",
     "util": "^0.12.5"
   }
