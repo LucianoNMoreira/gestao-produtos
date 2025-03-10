@@ -19,16 +19,13 @@ describe('Nav', () => {
 
   it('Link de logout', () => {
     const user = { id: '123', login: 'teste' }
+
     const mockLogout = jest.fn()
-    jest.spyOn(require('./Contexts/UserContext'), 'useUser').mockReturnValue({
-      user: user,
-      logout: mockLogout
-    })
 
     const token = jwt.sign(
                             {
                                 user: {
-                                    id: user._id,
+                                    id: user.id,
                                     login: user.login
                                 }
                             }, 
@@ -40,7 +37,9 @@ describe('Nav', () => {
     
     render(
       <UserProvider>
-        <Nav />
+        <Nav
+          signOut={mockLogout}
+        />
       </UserProvider>
     )
 

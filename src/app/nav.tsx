@@ -1,15 +1,28 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import React, { useEffect } from "react"
 import { useUser } from "./Contexts/UserContext"
 import Link from "next/link"
 
-export default function Nav() {
+type NavProps = {
+  signOut?: () => void
+}
+
+export default function Nav({ signOut }: NavProps) {
   const { user, logout } = useUser()
 
   useEffect(() => {
     console.log('nav user', user)
   }, [user])
+
+  const sair = () => {
+    console.debug(`Usuário ${user.login} está saindo`)
+    logout()
+    if (signOut) {
+      signOut()
+    }
+  }
 
   return (
     <nav>
@@ -23,7 +36,7 @@ export default function Nav() {
 
       {user &&
         <>
-          | <button data-testid='link-logout' onClick={logout}>Sair</button>
+        | <button data-testid='link-logout' onClick={sair}>Sair</button>
         </>
       }
 
