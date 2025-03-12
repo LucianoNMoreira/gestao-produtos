@@ -9,14 +9,14 @@ const handlers = [
 		}
 
 		const token = jwt.sign(
-											{
-													user: {
-															id: user._id,
-															login: user.login
-													}
-											}, 
-											'chave_secreta',
-											{ expiresIn: '1h' }
+			{
+				user: {
+					id: user._id,
+					login: user.login
+				}
+			},
+			'chave_secreta',
+			{ expiresIn: '1h' }
 		)
 
 		return HttpResponse.json({

@@ -9,7 +9,7 @@ jest.mock('next/navigation', () => ({
 const pushMock = jest.fn();
 useRouter.mockReturnValue({ push: pushMock })
 
-// Executar jest
+// Executar msw
 server.listen()
 
 // Hooks do jest
