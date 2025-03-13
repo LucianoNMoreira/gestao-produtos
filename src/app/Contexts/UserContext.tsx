@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
-import { createContext, useContext, useState, useEffect } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
@@ -18,16 +19,16 @@ export const UserProvider = ({ children }: any) => {
     console.log('UserContext login', login, senha)
 
     try {
-        const response = await axios.post('http://localhost:3000/api/v1/auth/login', {
-            login: login,
-            senha: senha
-        })
+      const response = await axios.post('http://localhost:3000/api/v1/auth/login', {
+        login: login,
+        senha: senha
+      })
 
-        Cookies.set('session', response.data.token)
-        router.push('/')
+      Cookies.set('session', response.data.token)
+      router.push('/')
 
-        setUser(obterUsuarioToken(response.data.token))
-    } catch(e) {
+      setUser(obterUsuarioToken(response.data.token))
+    } catch (e) {
       throw e
     }
   }
@@ -48,8 +49,8 @@ export const UserProvider = ({ children }: any) => {
   useEffect(() => {
     const token = Cookies.get('session')
     if (!user && token) {
-        setUser(obterUsuarioToken(token))
-        setUpdatedAt(new Date())
+      setUser(obterUsuarioToken(token))
+      setUpdatedAt(new Date())
     }
   }, [user])
 
@@ -59,8 +60,8 @@ export const UserProvider = ({ children }: any) => {
   }, [user, updatedAt])
 
   return (
-		<UserContext.Provider value={{ user, login, logout }}>
-			{children}
-		</UserContext.Provider>
-	)
+    <UserContext.Provider value={{ user, login, logout }}>
+      {children}
+    </UserContext.Provider>
+  )
 }

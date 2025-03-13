@@ -2,8 +2,8 @@
 
 import axios, { AxiosResponse } from 'axios'
 import { ProdutoType } from './types'
-import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function Home() {
   const [produtos, setProdutos] = useState<ProdutoType[]>([])
@@ -31,7 +31,7 @@ export default function Home() {
       <h1>Produtos</h1>
       <p><strong>Quantidade de produtos:</strong> {qtde}</p>
 
-      <a href='/produtos/novo'>Cadastrar novo produto</a>
+      <Link href='/produtos/novo'>Cadastrar novo produto</Link>
 
       <table>
         <thead>

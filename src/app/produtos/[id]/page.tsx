@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Produto from '@/db/models/produto'
 import { ReactNode } from 'react'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function generateMetadata({ params, searchParams }: any, parent: any) {
     const { id } = await params
 

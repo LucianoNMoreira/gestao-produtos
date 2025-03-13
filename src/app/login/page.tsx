@@ -26,9 +26,9 @@ export default function Pagina() {
  
   return (
     <form onSubmit={handleSubmit}>
-      <input type="login" name="login" placeholder="login" required autoFocus />
-      <input type="password" name="senha" placeholder="senha" required />
-      <button type="submit">Login</button>
+      <input type="login" name="login" placeholder="login" required autoFocus data-testid='login' />
+      <input type="password" name="senha" placeholder="senha" required data-testid='senha' />
+      <button type="submit" data-testid='submit'>Login</button>
 
       <br/>
 

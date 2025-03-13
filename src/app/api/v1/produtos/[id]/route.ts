@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ProdutoType } from '@/app/types'
 import Produto from '@/db/models/produto'
 import { NextRequest } from 'next/server'

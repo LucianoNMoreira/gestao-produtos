@@ -4,7 +4,7 @@ const UsuarioSchema = new mongoose.Schema({
     login: { type: String, required: true, index: true },
     email: { type: String, required: true, index: true },
     senha: { type: String, required: true },
-    token_nova_senha: { type: String, required: true, index: true }
+    token_nova_senha: { type: String, index: true }
   },
   {
     versionKey: false
